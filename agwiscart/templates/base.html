@@ -1,0 +1,622 @@
+<!doctype html>{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" href="{% static 'images/vdlogo.jpg' %}" type="image/x-icon">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="{% static '/css/open-iconic-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static '/css/animate.css' %}">
+
+  <link rel="stylesheet" href="{% static '/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static '/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static '/css/magnific-popup.css' %}">
+
+  <link rel="stylesheet" href="{% static '/css/aos.css' %}">
+
+  <link rel="stylesheet" href="{% static '/css/ionicons.min.css' %}">
+
+  <link rel="stylesheet" href="{% static '/css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static '/css/jquery.timepicker.css' %}">
+
+
+  <link rel="stylesheet" href="{% static '/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static '/css/icomoon.css' %}">
+ 
+  <!--log in sign up modal style-->
+  
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static '/login/images/icons/favicon.ico' %}"/>
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static '/login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/animate.css' %}">
+  <!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="{% static '/login/vendor/css-hamburgers/hamburgers.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static '/login/vendor/animsition/css/animsition.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static '/login/vendor/select2/select2.min.css' %}">
+  <!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="{% static '/login/vendor/daterangepicker/daterangepicker.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static '/login/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/login/css/main.css' %}">
+  <!--===============================================================================================-->
+
+
+  <title>{% block title %} {% endblock %}</title>
+
+
+
+
+</head>
+
+<body>
+
+
+  <div class="py-1 bg-black">
+    <div class="container">
+      <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+        <div class="col-lg-12 d-block">
+          <div class="row d-flex">
+            <div class="col-md pr-4 d-flex topper align-items-center">
+              <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span>
+              </div>
+              <span class="text">+ 1235 2355 98</span>
+            </div>
+            <div class="col-md pr-4 d-flex topper align-items-center">
+              <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                  class="icon-paper-plane"></span></div>
+              <span class="text">youremail@email.com</span>
+            </div>
+            <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+              <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="/">VD Cart</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto js-signin-modal-trigger">
+          <li class="nav-item {% block homeactive %}  {% endblock homeactive %}"><a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {% block shopactive %} {% endblock shopactive%}" href="#" id="dropdown04"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item " href="{% url 'shoppage'%}">Shop</a>
+              <a class="dropdown-item" href="product-single.html">Single Product</a>
+              <a class="dropdown-item" href="{% url 'cart'%}" id="popcart">Cart</a>
+              <a class="dropdown-item" href="checkout.html">Checkout</a>
+            </div>
+          </li>
+          <li class="nav-item  {% block aboutactive %} {% endblock aboutactive %}"><a href="{% url 'aboutpage' %}"
+              class="nav-link">About</a></li>
+          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+          <li class="nav-item {% block contactactive %} {% endblock contactactive %}"><a href="{%url 'contactpage'%}"
+              class="nav-link">Contact</a></li>
+       
+          {% if request.user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link btn btn-primary" href="{% url 'logout' %}" role="button">Logout</a></li>
+          {% else %}
+          <li class="nav-item cta cta-colored"><a href="{% url 'loginpage' %}" class="nav-link">Log In</a></li>
+          <li class="nav-item cta cta-colored mr-1"><a href="#" class="nav-link" data-toggle="modal" data-target="#signupmodal">Sign Up</a></li>
+          {% endif %}
+            
+              <!-- inser more links here -->
+              <!-- <li><a class="cd-main-nav__item cd-main-nav__item--signin" href="#0" data-signin="login">Sign in</a></li>
+              <li><a class="cd-main-nav__item cd-main-nav__item--signup" href="#0" data-signin="signup">Sign up</a></li>
+         -->
+
+          <li class="nav-item cta cta-colored ml-2"><a href="{% url 'cart'%}" class="nav-link">[<span id="cart"
+                class="icon-shopping_cart">{{request.session.cart|length}}</span>]</a></li>
+          
+         
+          <!-- <li class="nav-item cta cta-colored"><a href="#" type="l" class="nav-link" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
+              sagittis lacus vel augue laoreet rutrum faucibus.">[<span id="cart" class="icon-shopping_cart">0</span>]</a></li> -->
+          <!-- <li class="nav-item cta cta-colored">    <button type="l" class="nav-link" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
+              sagittis lacus vel augue laoreet rutrum faucibus."> -->
+          <!-- <li class="nav-item cta cta-colored"> <button type="button" class="btn btn-link nav-link" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
+              sagittis lacus vel augue laoreet rutrum faucibus.">
+              
+              
+             
+                
+              
+                Cart[<span id="cart" class="icon-shopping_cart">0</span>]
+              </button></li> -->
+          <!-- <a class="nav-link" href="#">Cart(<span id="cart">0</span>)</a> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+  <!-- sign up modal form -->
+  <div class="modal fade" id="signupmodal" tabindex="-1" role="dialog" aria-labelledby="signupmodalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body wrap-login100">
+
+          <!-- <form method="POST" action="/signup/">
+              {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">First Name</label>
+                      <input type="text" name="signupfname" class="form-control" placeholder="First name">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Last Name</label>
+                      <input type="text" name="signuplname" class="form-control" placeholder="Last name">
+                    </div>
+                </div>
+                <div class="form-row">
+                  
+                  <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                  <div class="input-group mb-2">
+                     
+                    <div class="input-group-prepend">
+                      
+                      <div class="input-group-text">@</div>
+                    </div>
+                    
+                    <input type="text" name="uname" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                  </div>
+               
+            </div>
+            <div class="form-row">
+              
+                <label for="inputEmail4">Email</label>
+                <input type="email" name="signupemail" class="form-control" id="inputEmail4" placeholder="Email">
+              
+            </div>
+              <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Password</label>
+                <input type="password" name="signuppass" class="form-control" id="inputPassword4" placeholder="Password">
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="inputPassword4">confirm-Password</label>
+                  <input type="password" name="signupcpass" class="form-control" id="inputPassword4" placeholder=" confirm-Password">
+                </div>
+            </div>
+           
+           
+            <div class="form-group">
+                <label class="mr-3">
+                   You Already Have an Account?<a href="{% url 'loginpage' %}" >Log In</a> </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form> -->
+          <!-- <div class="limiter"> -->
+              <!-- <div class="container"> -->
+                <!-- <div class="wrap-login100"> -->
+                  <form class="login100-form validate-form" method="post" action="{% url 'signuphandle' %}">
+                    {% csrf_token %}
+                    <span class="login100-form-title p-b-34 p-t-27">
+                      Sign Up
+                    </span>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="wrap-input100 validate-input" data-validate = "Enter First Name">
+                                <input class="input100" type="text" name="signupfname" placeholder="First-Name">
+                               
+                        </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="wrap-input100 validate-input" data-validate = "Enter Last Name">
+                                <input class="input100" type="text" name="signuplname" placeholder="Last-Name">
+                               
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                          <input class="input100" type="text" name="uname" placeholder="Username">
+                          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                   </div>
+
+                   <div class="form-row">
+                      <div class="wrap-input100 validate-input" data-validate = "Enter Email">
+                        <input class="input100" type="email" name="signupemail" placeholder="E-Mail Address">
+                       
+                      </div>
+                 </div>
+                  
+                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                      <input class="input100" type="password" name="signuppass" placeholder="Password">
+                      <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="wrap-input100 validate-input" data-validate="Confirm-password">
+                          <input class="input100" type="password" name="signupcpass" placeholder="Confirm Password">
+                          <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                  </div>
+          </div>
+                    <div class="contact100-form-checkbox">
+                      <label class="label">
+                      <a href="{% url 'loginpage' %}" class="text-light">You Already Have an Account? Log In</a> </label>
+                      </label>
+                    </div>
+          
+          
+                    <div class="container-login100-form-btn">
+                 
+                          <button type="submit" class="login100-form-btn" name="submit" value="Submit">Sign Up</button>
+                        
+                        
+               
+                    </div>
+          
+                    <div class="text-center p-t-90">
+                      <a class="txt1" href="#">
+                        Forgot Password?
+                      </a>
+                    </div>
+                  </form>
+                <!-- </div> -->
+              <!-- </div>
+            </div> -->
+        
+            <div class="modal-footer">
+                
+                <button type="button" class="login100-form-btn" data-dismiss="modal">Close</button>
+                
+              </div>
+                 </div>
+               
+        
+      
+      </div>
+    </div>
+  </div>
+<!--finish sign up modal-->
+      
+      
+      
+      
+      
+      
+     
+
+
+
+
+
+  <!-- END nav -->
+  <!--
+                    Large modal
+<button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+ Small modal
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Log In</button>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+        <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Log In</button>
+</form>
+
+    </div>
+  </div>
+</div>
+	  </nav> -->
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Massage: </strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+  {% block body %} {% endblock body %}
+
+
+  </section>
+  <footer class="ftco-footer bg-light ftco-section">
+    <div class="container">
+      <div class="row">
+        <div class="mouse">
+          <a href="#" class="mouse-icon">
+            <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+          </a>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Winkel</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Menu</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">Shop</a></li>
+              <li><a href="#" class="py-2 d-block">About</a></li>
+              <li><a href="#" class="py-2 d-block">Journal</a></li>
+              <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Help</h2>
+            <div class="d-flex">
+              <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
+                <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
+                <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
+                <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+              </ul>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">FAQs</a></li>
+                <li><a href="#" class="py-2 d-block">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San
+                    Francisco, California, USA</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span
+                      class="text">info@yourdomain.com</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+
+          <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with
+            <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
+              target="_blank">Vivek Patel</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="{% static '/js/jquery.min.js' %}"></script>
+  <script src="{% static '/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static '/js/popper.min.js' %}"></script>
+  <script src="{% static '/js/bootstrap.min.js' %}"></script>
+  <script src="{% static '/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static '/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static '/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static '/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static '/js/aos.js' %}"></script>
+  <script src="{% static '/js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static '/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static '/js/scrollax.min.js' %}"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static '/js/google-map.js' %}"></script>
+  <script src="{% static '/js/main.js' %}"></script>
+
+
+  <!--===============================================================================================-->
+	<script src="{% static '/login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static '/login/vendor/animsition/js/animsition.min.js' %}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static '/login/vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static '/login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static '/login/vendor/select2/select2.min.js' %}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static '/login/vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static '/login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static '/login/vendor/countdowntime/countdowntime.js' %}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static '/login/js/main.js' %}"></script>
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+
+
+  <script>
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+     var user = '{{request.user}}'
+    /**var updatecart = document.getElementsByClassName("add-to-cart")
+    if(user){
+      for (i = 0; i <= updatecart.length; i++) {
+        updatecart[i].addEventListener('click', function () {
+          var product_id = this.dataset.product
+          var action = this.dataset.action
+          console.log('product_id:', product_id, 'action:', action)
+        })
+      }**/
+   
+
+
+    // Find out the cart items from localStorage
+    /**   if (localStorage.getItem('cart') == null) {
+         var cart = {};
+       } else {
+         cart = JSON.parse(localStorage.getItem('cart'));
+         updateCart(cart);
+       }
+       // If the add to cart button is clicked, add/increment the item
+       //$('.cart').click(function() {
+         //$('.divpr').on('click', 'a.cart', function(){
+           //$('.divpr').on('click', 'a.add-to-cart', function(){
+       $('a.add-to-cart').on('click', function(){
+         var idstr = this.id.toString();
+         if (cart[idstr] != undefined) {
+           cart[idstr] = cart[idstr] + 1;
+         } else {
+           cart[idstr] = 1;
+         }
+         updateCart(cart);
+       });**/
+
+    //Add Popover to cart
+    /**	$('#popcart').popover();
+      updatePopover(cart);
+      function updatePopover(cart) {
+        console.log('We are inside updatePopover');
+        var popStr = "";
+        popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+        var i = 1;
+        for (var item in cart) {
+          popStr = popStr + "<b>" + i + "</b>. ";
+          popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item] + '<br>';
+          i = i + 1;
+        }
+        popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
+        console.log(popStr);
+        document.getElementById('popcart').setAttribute('data-content', popStr);
+        $('#popcart').popover('show');
+      }**/
+    function clearCart() {
+      cart = JSON.parse(localStorage.getItem('cart'));
+
+      for (var item in cart) {
+        document.getElementById('cart' + item).innerHTML = '0';
+      }
+      localStorage.clear();
+      cart = {};
+      updateCart(cart);
+    }
+    function updateCart(cart) {
+      var sum = 0;
+      for (var item in cart) {
+        sum = sum + cart[item];
+        //document.getElementById('divpr' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cart').innerHTML = sum;
+      console.log(cart);
+      //updatePopover(cart);
+    }
+      // If plus or minus button is clicked, change the cart as well as the display value
+    /**$('.divpr').on("click", "button.minus", function() {
+      a = this.id.slice(7, );
+      cart['pr' + a] = cart['pr' + a] - 1;
+      cart['pr' + a] = Math.max(0, cart['pr' + a]);
+      document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+      updateCart(cart);
+    });
+    $('.divpr').on("click", "button.plus", function() {
+      a = this.id.slice(6, );
+      cart['pr' + a] = cart['pr' + a] + 1;
+      document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+      updateCart(cart);
+    });**/
+  </script>
+
+</body>
+
+</html>
