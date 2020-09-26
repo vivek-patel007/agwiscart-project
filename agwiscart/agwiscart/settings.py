@@ -27,6 +27,7 @@ SECRET_KEY = '%#&!km3*+o#$i4!y)sh0634c(r$$3jfzkq_q0%3_6j!v$g&#4a'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LOGIN_URL = '/login/'
 
 
 # Application definition
@@ -39,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home'
+    'django.contrib.postgres',
+    'home',
+    'shop',
 ]
 
 MIDDLEWARE = [

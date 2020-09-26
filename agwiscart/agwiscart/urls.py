@@ -18,7 +18,14 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 
+
+admin.site.site_header = 'agwiscart.com admin'
+admin.site.site_title = 'agwiscart admin'
+#admin.site.site_url = 'http://agwiscart.com/'
+admin.site.index_title = 'agwiscart administration'
+admin.empty_value_display = '**Empty**'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('shop/', include('shop.urls')),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
