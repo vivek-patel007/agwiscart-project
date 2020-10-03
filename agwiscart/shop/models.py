@@ -1,7 +1,6 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
+from agwiscart.utils import unique_slug_generator
+from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 #from mycart.utils import unique_slug_generator
@@ -35,6 +34,14 @@ class productimages(models.Model):
     active=models.BooleanField(default=True)
     timestamp=models.DateTimeField()
 
+    def default(self):
+        return self.image.filter(default=True).first()
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" width="150" height="150" />' .format(self.image.url))  # Get Image url
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags=True
+
     def __str__(self):
         return self.product.title
     
@@ -60,12 +67,24 @@ class product(models.Model):
 
     def get_price(self):
         return self.price
+    def get_images(self):
+        return self.productimages
 
     def __str__(self):
         return self.title
 
 
-def slug_generator(sender,instance,*args,**kwargs):
+def slug_generator_product(sender,instance,*args,**kwargs):
     if not instance.slug:
         instance.slug=unique_slug_generator(instance)
-pre_save.connect(slug_generator,sender=product)
+pre_save.connect(slug_generator_product,sender=product)
+
+def slug_generator_category(sender,instance,*args,**kwargs):
+    if not instance.slug:
+        instance.slug=unique_slug_generator(instance)
+pre_save.connect(slug_generator_category,sender=category)
+
+def slug_generator_subcategory(sender,instance,*args,**kwargs):
+    if not instance.slug:
+        instance.slug=unique_slug_generator(instance)
+pre_save.connect(slug_generator_subcategory,sender=subcategory)

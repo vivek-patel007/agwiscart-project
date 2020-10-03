@@ -29,10 +29,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 LOGIN_URL = '/login/'
 
-
+SLUGIFY_PROCESSORS = [
+   'project.app.slugify_processors.my_processor'
+]
 # Application definition
 
 INSTALLED_APPS = [
+     'django_slugify_processor',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,6 +66,9 @@ TEMPLATES = [
         'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
+            'builtins': [
+            'django_slugify_processor.templatetags.slugify_processor',
+        ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
