@@ -8,16 +8,21 @@ from django.db.models.signals import pre_save
 
 class category(models.Model):
     category_id=models.AutoField(primary_key=True)
-    title=models.CharField(max_length=128)
-    description = models.CharField(max_length=300)
+    title=models.CharField(max_length=125)
+    description = models.TextField(max_length=200)
     slug=models.SlugField(unique=True,default="",null=True,blank=True)
     active=models.BooleanField(default=True)
     timestamp=models.DateTimeField()
     def __str__(self):
         return self.title
+    
+    @property
+    def get_products(self):
+        return Products.objects.filter(category__title=self.title)
 
 class subcategory(models.Model):
     subcategory_id=models.AutoField(primary_key=True)
+    category    = models.ForeignKey('category',on_delete=models.CASCADE)
     title=models.CharField(max_length=128)
     description = models.TextField(max_length=200)
     slug=models.SlugField(unique=True,default="",null=True,blank=True)
@@ -49,7 +54,7 @@ class productimages(models.Model):
 class product(models.Model):
     product_id  = models.AutoField(primary_key=True)
     brand_name  = models.CharField(max_length=128, null = True,blank=True)
-    title       = models.CharField(max_length=50)
+    title       = models.CharField(max_length=128)
     category    = models.ForeignKey('category',related_name='Category',on_delete=models.CASCADE,default=1)
     subcategory = models.ForeignKey('subcategory',related_name='SubCategory',on_delete=models.CASCADE)
     price       = models.IntegerField()

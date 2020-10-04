@@ -33,7 +33,7 @@
 							{% for item in pr.productimages_set.all %}
 							{% if forloop.first %}
 							<a href="{% url 'single_product' pr.slug %}" class="img-prod"><img class="img-fluid"
-									src="/media/{{ item.image }}" alt="Colorlib Template">
+									src="/media/{{ item.image }}" alt="Product Images">
 								<span class="status">30%</span>
 								<div class="overlay"></div>
 							</a>
@@ -79,19 +79,18 @@
 			</div>
 
 
-			<div class="col-md-4 col-lg-2 sidebar">
+			<div class="col-md-4 col-lg-2 sidebar mb-0">
 				{% for pr in Product %}
-				{% ifchanged pr.category %}
-				<div class="sidebar-box-2">
-
-					<h2 class="heading mb-4"><b><a href="#"> {{ pr.category }} </a></b></h2>
+				<div class="sidebar-box-2 mb-0 mt-0">
+					{% ifchanged pr.subcategory.category %}
+					<h2 class="heading mb-4 mb-0"><b><a href="#"> {{ pr.subcategory.category }} </a></b></h2>
+					{% endifchanged %}
 					<ul>
-						<li><h6><a href="{% url 'categorious_product' pr.subcategory.subcategory_id %}">{{ pr.subcategory }}</a></h6></li>
-						
+						{% ifchanged pr.subcategory.title %}
+						<li><h6><a href="{% url 'subcategorious_product' pr.subcategory.subcategory_id %}">{{ pr.subcategory.title }}</a></h6></li>
+						{% endifchanged %}
 					</ul>
-
 				</div>
-				{% endifchanged %}
 				{% endfor %}
 			</div>
 			

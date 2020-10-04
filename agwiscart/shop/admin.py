@@ -21,9 +21,10 @@ class productimagesAdmin(admin.ModelAdmin):
 
 @admin.register(category)
 class categoryAdmin(admin.ModelAdmin):
-    pass
+    ordering=['title']
 
 @admin.register(subcategory)
 class subcategoryAdmin(admin.ModelAdmin):
-    pass
+    ordering=['subcategory_id']
+    list_display =("subcategory_id","category","title","timestamp")
     
