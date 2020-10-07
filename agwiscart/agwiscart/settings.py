@@ -29,13 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 LOGIN_URL = '/login/'
 
-SLUGIFY_PROCESSORS = [
-   'project.app.slugify_processors.my_processor'
-]
 # Application definition
 
 INSTALLED_APPS = [
-     'django_slugify_processor',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'home',
     'shop',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -154,7 +151,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 
 MESSAGE_TAGS = {
-   messages.ERROR:'danger'
+   messages.ERROR:'danger',
+   messages.WARNING:'warning'
 }
 MEDIA_URL='/media/'
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media')

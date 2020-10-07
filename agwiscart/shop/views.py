@@ -13,17 +13,18 @@ def subcategories(request,id):
     contex={'Product':prod}
     return render(request, 'shop/home.html',contex)
 
-# def categories(request,id):
-#     # cats=subcategory.objects.get(category=id)
-#     prod=product.objects.filter(category=id)
-#     contex={'Product':prod}
-#     return render(request, 'shop/home.html',contex)
+def categories(request,id):
+    cats=category.objects.get(category_id=id)
+    prod=product.objects.filter(category=cats)
+    contex={'Product':prod}
+    return render(request, 'shop/home.html',contex)
 
-def single_product(request, slug):
-    try:
-        prods=product.objects.get(slug=slug)
-        contex={'Product':prods}
-        return render(request, 'shop/single_product.html',contex)
-    except:
-        raise Http404
+def single_product(request, slug, sid):
+    # try:
+    prods=product.objects.get(slug=slug)
+    rel=product.objects.filter(subcategory=sid)
+    contex={'Product':prods,'rel':rel}
+    return render(request, 'shop/single_product.html',contex)
+    # except:
+    #     raise Http404
 

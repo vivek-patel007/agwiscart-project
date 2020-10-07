@@ -8,6 +8,7 @@ class ImageInline(GenericTabularInline):
 
 @admin.register(product)
 class productAdmin(admin.ModelAdmin):
+    list_filter = ('category', 'subcategory')
     list_display = ("brand_name", "title","category","subcategory","sell_price","description","active")
 
 @admin.register(productimages)

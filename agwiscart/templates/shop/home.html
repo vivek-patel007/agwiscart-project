@@ -10,7 +10,7 @@
 	<div class="container">
 	  <div class="row no-gutters slider-text align-items-center justify-content-center">
 		<div class="col-md-9 ftco-animate text-center">
-			<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
+			<p class="breadcrumbs"><span class="mr-2">Shop</p>
 		  <h1 class="mb-0 bread">Collection Products</h1>
 		</div>
 	  </div>
@@ -32,15 +32,18 @@
 
 							{% for item in pr.productimages_set.all %}
 							{% if forloop.first %}
-							<a href="{% url 'single_product' pr.slug %}" class="img-prod"><img class="img-fluid"
+							<a href="{% url 'single_product' pr.slug pr.subcategory.subcategory_id %}" class="img-prod"><img class="img-fluid"
 									src="/media/{{ item.image }}" alt="Product Images">
-								<span class="status">30%</span>
+								{% if pr.offer %}
+								<span class="status">{{ pr.offer_percentage }}%</span>
+								{% endif %}
 								<div class="overlay"></div>
+								
 							</a>
 							{% endif %}
 							{% endfor %}
 							<div class="text py-3 px-3">
-								<h3><a href="#" id="namepr{{pr.product_id}}">{{ pr.title }}</a></h3>
+								<h3><a href="{% url 'single_product' pr.slug pr.subcategory.subcategory_id %}" id="namepr{{pr.product_id}}">{{ pr.title }}</a></h3>
 								<div class="d-flex">
 									<div class="pricing">
 										<p class="price"><span class="mr-2 price-dc">${{pr.price}}</span><span
@@ -62,11 +65,21 @@
 								
 
 
-
-									<a href="#" data-product="{{ pr.product_id }}" data-action="add"
-										id="pr{{ pr.product_id }}" class="add-to-cart text-center py-2 mr-1">
+									<!-- <form method="POST" action="">
+									
+										<input type="hidden" name="pid" value="{{pr.product_id}}">
+										<input type="hidden" name="qty" value="1">
+										<input type="submit" id="sub">
+				
+									</form> -->
+									<a href="{% url 'update_cart' pr.slug pr.product_id %}" data-product="{{ pr.product_id }}" data-action="add"
+										id="submit" class="add-to-cart text-center py-2 mr-1" >
+										
 										<span id="divpr{{ pr.product_id }}" class="divpr">Add to cart <i class="ion-ios-cart ml-1"></i></span></a>
-									<a href="{% url 'single_product' pr.slug %}" class="buy-now text-center py-2">View
+									
+									
+									
+										<a href="{% url 'single_product' pr.slug pr.subcategory.subcategory_id %}" class="buy-now text-center py-2">View
 										more<span><i class="ion-ios-add ml-1"></i></span></a>
 								</p>
 							</div>
