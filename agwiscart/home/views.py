@@ -6,9 +6,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from shop.models import product,category
 # Create your views here.
 def homepage(request):
-    return render(request, 'home/home.html')
+    context={}
+    context['loop_times'] = range(0, 8)
+    context['prod']=product.objects.all()
+    return render(request, 'home/home.html',context)
 def contact(request):
     if request.method=='POST':
       fullname=request.POST['fullname']
@@ -85,5 +89,6 @@ def loginhandle(request):
 
 def logouthandle(request):
     logout(request)
+    request.session.flush()
     messages.success(request, "logout success")
     return redirect("loginpage")

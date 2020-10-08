@@ -23,6 +23,7 @@ class productimagesAdmin(admin.ModelAdmin):
 @admin.register(category)
 class categoryAdmin(admin.ModelAdmin):
     ordering=['title']
+    list_display =("category_id","title")
 
 @admin.register(subcategory)
 class subcategoryAdmin(admin.ModelAdmin):

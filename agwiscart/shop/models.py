@@ -18,6 +18,7 @@ class category(models.Model):
     @property
     def get_products(self):
         return Products.objects.filter(category__title=self.title)
+        
 
 class subcategory(models.Model):
     subcategory_id  =   models.AutoField(primary_key=True)

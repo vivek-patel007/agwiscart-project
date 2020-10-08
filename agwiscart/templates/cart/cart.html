@@ -28,6 +28,7 @@
 						        <th>&nbsp;</th>
 						        <th>Product</th>
 						        <th>Price</th>
+						       
 						        <th>Quantity</th>
 						        <th>Total</th>
 						      </tr>
@@ -49,62 +50,31 @@
 							<p id="prod-name">{{ items.product}}</p>
 						</td>
 					
+					
+							<td class="price">
+								<del id="pp{{items.id}}">{{ items.product.price}}</del><br>
+								
+			
+							<span id="sp{{items.id}}">{{ items.product.sell_price}}</span>
+										</td>
+				
 						
-						<td class="price">${{ items.product.price}}</td>
+						
 						
 						<td class="quantity">
 							<div class="input-group mb-3">
-								<input type="text" name="quantity" class="quantity form-control input-number" value="{{ items.quantity}}" min="1" max="100">
-								
+								<i class="fa fa-minus mt-3 mr-2" onclick="chang_qnt('{{items.id}}','minus')"></i>
+							
+								<input type="text" id="qnt{{items.id}}" name="quantity" class="form-control quantity form-control input-number"
+								 value="{{ items.quantity}}" min="1" max="100">
+								<i class="fa fa-plus mt-3 ml-2" onclick="chang_qnt('{{items.id}}','plus')"></i>
 						  </div>
 					  </td>
 					 
-						<td class="total">{{ items.line_totle }}</td>
+						<td class="total" id="line_totle">{{ items.line_totle }}</td>
 					  </tr>
 					  {% endfor %}
 					  <!-- END TR-->
-						      <!-- <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
-						       
-						        <td class="product-name">
-						        	<h3></h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-                                </td>
-                                
-						        
-						        <td class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">$4.90</td>
-						      </tr>END TR -->
-
-						      <!-- <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url(images/product-4.jpg);"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Young Woman Wearing Dress</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td class="price">$15.70</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">$15.70</td>
-						      </tr>END TR -->
 						    </tbody>
 						  </table>
 					  </div>
@@ -116,7 +86,7 @@
     					<h3>Cart Totals</h3>
     					<p class="d-flex">
     						<span>Subtotal</span>
-    						<span>$20.60</span>
+    						<span id="totle"></span>
     					</p>
     					<p class="d-flex">
     						<span>Delivery</span>
@@ -124,12 +94,12 @@
     					</p>
     					<p class="d-flex">
     						<span>Discount</span>
-    						<span>$3.00</span>
+    						<span id="offer" class="text-success"></span>
     					</p>
     					<hr>
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span>$17.60</span>
+    						<span id="grand_totle"></span>
     					</p>
     				</div>
     				<p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
@@ -138,64 +108,60 @@
 			</div>
 
   <script>
-	  $('#popcart').popover();
-updatePopover(cart);
-function updatePopover(cart)
-{
-    /**console.log('We are inside updatePopover');
-    var popStr = "";
-    popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
-    var i = 1;**/
-    for (var item in cart){
-        popStr = popStr + "<b>" + i + "</b>. ";
-        popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item] + '<br>';
-        i = i+1;
-    }
-    popStr = popStr + "</div>" 
-    console.log(popStr);
-    document.getElementById('popcart').setAttribute('data-content', popStr);
-    $('#popcart').popover('show');
-}
-		$(document).ready(function(){
-			//me added
-			item={}
-			for (var item in cart){
-			document.getElementById('prod-name').innerHTML.cart[item.name];
-				i = i+1;
+	  function grandtotle(){
+		
+		  $.ajax({
+			  url: "{% url 'data' %}",
+			  type:"get",
+			  success:function(data){
+
+				 // gt += length(data.sell_price)
+				  desc =data.price-data.sell_price
+				  $("#line_totle").html(data.sell_price)
+				  $("#totle").html(data.sell_price)
+				  $("#offer").html(desc)
+				  $("#grand_totle").html(data.totle)
+				  //$("#item_totle").html(data.)
+			  }
+		  });
+	  }
+	  grandtotle()
+	  function chang_qnt(id,action){
+		let old= $("#qnt"+id).val();
+
+		q=0
+		if(action=="plus"){
+			q+=parseInt(old)+1;
+		}else{
+			q+=parseInt(old)-1;
+		}
+		$('#qnt'+id).val(q);
+		quantity=$('#qnt'+id).val();
+		$.ajax({
+			url: "{% url 'change_qnt' %}",
+			type:"get",
+			data:{cid:id,quantity:quantity},
+			success:function(data){
+				//alert(data);
+				grandtotle()
+				$("#pp"+id).html(data.price)
+				$("#sp"+id).html(data.sell_price)
+			/**	pp=$('#pp'+id).html()*quantity;
+				sp=$('#sp'+id).html()*quantity;
+				parseInt(pp)
+				parseFloat(sp)
+				$('#sp'+id).html(pp);
+				$('#sp'+id).html(sp);**/
+
+			//	$('#pp').html(data.price);
+			//	$('#sp').html(data.sell_price);
+				
+				//desc =data.price-data.sell_price
+				//$("#totle").html(data.sell_price)
+				//$("#offer").html(desc)
+				//$("#grand_totle").html(data.sell_price)
 			}
-			//me added finish
-
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		            
-		            $('#quantity').val(quantity + 1);
-
-		          
-		            // Increment
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		      
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
-		    
 		});
+	  }grandtotle()
 	</script>
 	{% endblock body%} 
