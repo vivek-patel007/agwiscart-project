@@ -7,11 +7,13 @@ from django.contrib.auth import authenticate,logout,login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from shop.models import product,category
+from home.models import Contact 
 # Create your views here.
 def homepage(request):
     context={}
-    context['loop_times'] = range(0, 8)
-    context['prod']=product.objects.all()
+   #  context['loop_times'] = range(0, 8)
+    context['prod']=product.objects.all().order_by('product_id')[0:8]  
+   
     return render(request, 'home/home.html',context)
 def contact(request):
     if request.method=='POST':
@@ -20,10 +22,10 @@ def contact(request):
       cemail=request.POST['cemail']
       msg=request.POST['msg']
       #print(fname,lname,mobile,cemail,msg)
-      if fullname=="" or len(subject)<4 or cemail=="" or len(msg)<10 :
+      if fullname=="" or len(subject)<4 or cemail=="" or len(msg)<3 :
          messages.error(request, "please fill up the details correctly")
       else:
-         data=Contact(fullname=fullname, subject=subject, cemail=cemail,msg=msg)
+         data=Contact(full_name=fullname, subject=subject, email=cemail,msg=msg)
          data.save()
          messages.success(request, "your massage has been successfully sent..")
     return render(request, 'home/contact.html')

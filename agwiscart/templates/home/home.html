@@ -65,7 +65,7 @@
     			</div>
     			<div class="col-md-4 py-md-5 ftco-animate">
     				<div class="text py-3 py-md-5">
-	            <h2 class="mb-4">New Women's Clothing Summer Collection 2019</h2>
+	            <h2 class="mb-4">New Women's Clothing Summer Collection 2020</h2>
 	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 	            <p><a href="{% url 'categorious_product' id=6 %}" class="btn btn-white px-4 py-3">Shop now</a></p>
     				</div>
@@ -78,7 +78,7 @@
     			</div>
     			<div class="col-md-7 py-3 py-md-5 ftco-animate">
     				<div class="text text-2 py-md-5">
-	            <h2 class="mb-4">New Men's Clothing Summer Collection 2019</h2>
+	            <h2 class="mb-4">New Men's Clothing Summer Collection 2020</h2>
 	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 	            <p><a href="{% url 'categorious_product' id=5%}" class="btn btn-primary px-4 py-3">Shop now</a></p>
     				</div>
@@ -232,13 +232,17 @@
 				
 			
 				
-				{% comment %}
+				
 				{% for pr in prod %}
+    {% if forloop.counter0|divisibleby:4 %}
+        </div><br><div class="row">
+    {% endif %}
+				   
     			<div class="col-sm col-md-6 col-lg ftco-animate">
     				<div class="product">
 						{% for item in pr.productimages_set.all %}
 							{% if forloop.first %}
-    					<a href="#" class="img-prod"><img class="img-fluid" src="/media/{{ item.image }}" alt="Colorlib Template">
+    					<a href="{% url 'single_product' pr.slug pr.subcategory.subcategory_id %}" class="img-prod"><img class="img-fluid" src="/media/{{ item.image }}" alt="Colorlib Template">
 							{% if pr.offer %}
 							<span class="status">{{ pr.offer_percentage }}%</span>
 							{% endif %}
@@ -247,7 +251,7 @@
 						{% endif %}
 							{% endfor %}
     					<div class="text py-3 px-3">
-    						<h3><a href="#">{{ pr.title }}</a></h3>
+    						<h3><a href="{% url 'single_product' pr.slug pr.subcategory.subcategory_id %}">{{ pr.title }}</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span class="mr-2 price-dc">${{pr.price}}</span><span class="price-sale">${{pr.sell_price}}</span></p>
@@ -263,8 +267,8 @@
 	    						</div>
 	    					</div>
     						<p class="bottom-area d-flex px-3">
-    							<a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-    							<a href="#" class="buy-now text-center py-2">View
+    							<a href="{% url 'update_cart' pr.slug pr.product_id %}" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="{% url 'single_product' pr.slug pr.subcategory.subcategory_id %}" class="buy-now text-center py-2">View
 									more<span><i class="ion-ios-add ml-1"></i></span></a>
     						</p>
     					</div>
@@ -272,7 +276,8 @@
 				</div>
 			
 				{% endfor %}
-				{% endcomment %}
+			
+				
 	</div>
 </div>
     </section>

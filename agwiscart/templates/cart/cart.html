@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} cart {% endblock %}
-{% block shopactive %}active{% endblock shopactive%}
+{% block cartactive %}active{% endblock cartactive%}
 {% block body %}
 
 
-    <div class="hero-wrap hero-bread" style="background-image: url( '{% static 'images/bg_6.jpg' %}');">
+    <div class="hero-wrap hero-bread" style="background-image: url(() '{% static 'images/bg_6.jpg' %}'))">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -23,7 +23,7 @@
     				<div class="cart-list">
 	    				<table class="table">
 						    <thead class="thead-primary">
-						      <tr class="text-center">
+						      <tr class="text-center" id="s">
 						        <th>&nbsp;</th>
 						        <th>&nbsp;</th>
 						        <th>Product</th>
@@ -35,9 +35,12 @@
 						    </thead>
 						    <tbody>
 								{% for items in item %}
-								<tr class="text-center">
+								<tr class="text-center" id="row{{items.id}}">
 						
-						<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+						<!-- <td class="product-remove"><a href="#" onclick="remove_item('{{ items.id }}')">
+							<span class="ion-ios-close"></span></a></td> -->
+							<td class="product-remove"><a href="#s" onclick="remove_item('{{ items.id }}')">
+								<span  class="ion-ios-close"></span></a></td>
 						{% for pr in items.product.productimages_set.all %}
 							{% if forloop.first %}
 						<td class="image-prod"><div class="img" style="background-image:url( '/media/{{ pr.image }}')">
@@ -71,7 +74,7 @@
 						  </div>
 					  </td>
 					 
-						<td class="total" id="line_totle">{{ items.line_totle }}</td>
+						<td class="total t{{items.id}}" id="line_totle">{{items.line_totle}}</td>
 					  </tr>
 					  {% endfor %}
 					  <!-- END TR-->
@@ -114,26 +117,33 @@
 			  url: "{% url 'data' %}",
 			  type:"get",
 			  success:function(data){
-
-				 // gt += length(data.sell_price)
+				
+				
+				crt="{% if request.session %} {{request.session.totle_item}} {%else%}0{%endif%}"
+				$("#cart").html(crt)
+          
+				 
 				  desc =data.price-data.sell_price
-				  $("#line_totle").html(data.sell_price)
 				  $("#totle").html(data.sell_price)
 				  $("#offer").html(desc)
-				  $("#grand_totle").html(data.totle)
-				  //$("#item_totle").html(data.)
+				  $("#grand_totle").html(data.sell_price)
+				
 			  }
 		  });
 	  }
 	  grandtotle()
 	  function chang_qnt(id,action){
 		let old= $("#qnt"+id).val();
-
+		if(old==0){
+			remove_item(id)
+		}
 		q=0
 		if(action=="plus"){
 			q+=parseInt(old)+1;
+			grandtotle()
 		}else{
 			q+=parseInt(old)-1;
+			grandtotle()
 		}
 		$('#qnt'+id).val(q);
 		quantity=$('#qnt'+id).val();
@@ -144,24 +154,26 @@
 			success:function(data){
 				//alert(data);
 				grandtotle()
+				if(data.quantity==0){
+					remove_item(id)
+				}
 				$("#pp"+id).html(data.price)
 				$("#sp"+id).html(data.sell_price)
-			/**	pp=$('#pp'+id).html()*quantity;
-				sp=$('#sp'+id).html()*quantity;
-				parseInt(pp)
-				parseFloat(sp)
-				$('#sp'+id).html(pp);
-				$('#sp'+id).html(sp);**/
-
-			//	$('#pp').html(data.price);
-			//	$('#sp').html(data.sell_price);
-				
-				//desc =data.price-data.sell_price
-				//$("#totle").html(data.sell_price)
-				//$("#offer").html(desc)
-				//$("#grand_totle").html(data.sell_price)
 			}
 		});
-	  }grandtotle()
+	  }
+	  function remove_item(id){
+		$.ajax({
+			url: "{% url 'change_qnt' %}",
+			type:"get",
+			data: {delete_cart:id},
+			success:function(data){
+				grandtotle()
+				$("#row"+id).hide()
+				
+				
+			}
+		})
+	  }
 	</script>
 	{% endblock body%} 

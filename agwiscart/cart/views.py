@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponseRedirect,Http404,JsonResponse
+from django.http import HttpResponseRedirect,Http404,JsonResponse,HttpResponse
 from django.urls import reverse
 from cart.models import UserCart
 from shop.models import product
@@ -33,16 +33,18 @@ def update_cart(request,slug, pid):
 def get_cart_data(request):
     items=UserCart.objects.filter(owner=request.user.id,payment_status=False)
     
-    price,sell_price,quntity=0,0,0
+    price,sell_price,quntity,line_totle=0,0,0,0
     for i in items:
         price += int(i.product.price)*i.quantity
-        sell_price +=float(i.product.sell_price)*i.quantity
+        line_totle = float(i.product.sell_price)*int(i.quantity)
+        # line_totle = i.line_totle()
+        sell_price += float(i.product.sell_price)*i.quantity
         quntity += int(i.quantity)
        
         # totle +=float(i.product.sell_price)
 
     res={
-        "price":price,"sell_price":sell_price,"quntity":quntity,
+        "price":price,"sell_price":sell_price,"quntity":quntity,"line_totle":line_totle,
     }
     return JsonResponse(res)
 def change_qnt(request):
@@ -52,18 +54,27 @@ def change_qnt(request):
             quantity=request.GET.get('quantity',None)
             cart=get_object_or_404(UserCart,id=cid)
             cart.quantity=quantity
+            print(cart.id)
+            print(cart.quantity)
             cart.save()
             data={
                 "cid":cid,
-                 "quantity":quantity
+                "quantity":quantity
             }
             return JsonResponse(data)
         except MultiValueDictKeyError:
             cid=False
             quantity=False
-            return HttpResponseRedirect(reverse("cart_homepage"))
-        # print(cid)
-        # print(quantity)
-        # cart=get_object_or_404(UserCart,id=cid)
-        # cart.quantity=quantity
-        # cart.save()
+        
+    if "delete_cart" in request.GET:
+        try:
+            id=request.GET.get('delete_cart',None)
+            print(id)
+            cart=get_object_or_404(UserCart,id=id)
+            cart.delete()
+            data={
+                "id":cart.id,
+            }
+            return JsonResponse(data)
+        except MultiValueDictKeyError:
+            id=False

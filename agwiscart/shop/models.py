@@ -71,7 +71,6 @@ class product(models.Model):
         constraints     = [
             models.UniqueConstraint(fields=['title', 'slug'], name='name of constraint')
         ]
-
     def get_price(self):
         return self.price
     def get_images(self):
