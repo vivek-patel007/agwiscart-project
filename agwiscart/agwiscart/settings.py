@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+    'paypal.standard.ipn',
     'home',
     'shop',
     'cart',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -156,3 +158,7 @@ MESSAGE_TAGS = {
 }
 MEDIA_URL='/media/'
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
+
+PAYPAL_RECEIVER_EMAIL = 'pvivek093@mail.com'
+
+PAYPAL_TEST = True
