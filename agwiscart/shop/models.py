@@ -54,15 +54,15 @@ class productimages(models.Model):
 class product(models.Model):
     product_id          = models.AutoField(primary_key=True)
     brand_name          = models.CharField(max_length=128, null = True,blank=True)
-    title               = models.CharField(max_length=128)
+    title               = models.CharField(max_length=300)
     category            = models.ForeignKey('category',related_name='Category',on_delete=models.CASCADE,default=1)
     subcategory         = models.ForeignKey('subcategory',related_name='SubCategory',on_delete=models.CASCADE)
     price               = models.IntegerField()
-    sell_price          = models.DecimalField(decimal_places=2,max_digits=100,default=10.99,null=True,blank=True)
+    sell_price          = models.PositiveIntegerField()
     offer               = models.BooleanField(default=False)
     offer_percentage    = models.PositiveIntegerField()
     description         = models.TextField()
-    slug                = models.SlugField(unique=True,null=True,blank=True)
+    slug                = models.SlugField(unique=True,null=True,blank=True,max_length=255)
     pub_date            = models.DateField(auto_now_add=True,auto_now=False)
     active              = models.BooleanField(default=True)
     

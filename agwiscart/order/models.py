@@ -16,5 +16,5 @@ class Order(models.Model):
     zip_code=models.CharField(max_length=111)
     phone=models.CharField(max_length=111, default="")
     email=models.CharField(max_length=111)
-    amount=models.DecimalField(decimal_places=2,max_digits=100,default=00.00,null=True,blank=True)
+    amount=models.PositiveIntegerField()
     
