@@ -103,7 +103,7 @@
             <p style="color: #000;">80 piece available</p>
           </div>
         </div>
-        <p><a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a></p>
+        <p><a href="{% url 'update_cart' Product.slug Product.product_id %}" class="btn btn-black py-3 px-5">Add to Cart</a></p>
       </div>
     </div>
   </div>

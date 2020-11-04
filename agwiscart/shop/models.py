@@ -60,7 +60,7 @@ class product(models.Model):
     price               = models.IntegerField()
     sell_price          = models.PositiveIntegerField()
     offer               = models.BooleanField(default=False)
-    offer_percentage    = models.PositiveIntegerField()
+    offer_percentage    = models.PositiveIntegerField(null=True,blank=True)
     description         = models.TextField()
     slug                = models.SlugField(unique=True,null=True,blank=True,max_length=255)
     pub_date            = models.DateField(auto_now_add=True,auto_now=False)
