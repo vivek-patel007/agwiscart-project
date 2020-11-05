@@ -24,10 +24,8 @@ def place_order(request):
        print(fname)
         # lname,state,add,add2,city,zipc,phone,mail,1.00)
             
-       if fname=="" or lname=="" or state=="" or add=="" or city=="" or zip=="" or phone=="" or mail=="":
+       if fname=="" or lname=="" or state=="" or add=="" or city=="" or zip=="" or len(zipc)<6 or phone=="" or mail=="":
             messages.error(request,"please fill up the all details")
-       if len(zipc)<6:
-           messages.error(request,"please enter valid zip code...")
        else:
             ordr=Order(first_name=fname,last_name=lname,state=state,address=add,address2=add2,city=city,zip_code=zipc,phone=phone,email=mail,amount=amt)
             ordr.save()
