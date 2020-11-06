@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} Agwiscart.com-payment-done {% endblock %}
-{% block content %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 mx-auto my-5 p-5 text-center" style="box-shadow: 0px 0px 10px gray;">
+        <h2 class="text-success">Payment done. <br>place order successfully...</h2>
+       
+                <img src="{% static 'images/success.gif' %}" height="300" width="300" alt="success image"><br>
+                <a href="{% url 'shop_homepage' %}"><h2 class="text-warning">Click Hear To Continue Shopping.</h2></a>
+                <a href=""><h4 class="text-warning">go to Dashboard.</h2></a>
 
-    <p>Payment done.</p>
+        </div>
+        </div>
+        </div>
 
-{% endblock %}
+{% endblock body %}
