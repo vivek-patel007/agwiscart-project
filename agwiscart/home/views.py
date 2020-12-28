@@ -69,7 +69,7 @@ def signuphandle(request):
       myuser.first_name=first_name
       myuser.last_name=last_name
       myuser.save()
-      messages.success(request, "sign up successfully now u log in....")
+      messages.success(request, "sign up successfully.now you log in....")
       return redirect("loginpage")
    return render(request, 'home/home.html')
 
@@ -83,7 +83,7 @@ def loginhandle(request):
          user=authenticate(username=uname,password=upass)
          if user is not None:
             login(request, user)
-            messages.success(request, "login success")
+            # messages.success(request, "login success")
             return HttpResponseRedirect(reverse('homepage'))
    else:
       fm=AuthenticationForm()
@@ -92,5 +92,5 @@ def loginhandle(request):
 def logouthandle(request):
     logout(request)
     request.session.flush()
-    messages.success(request, "logout success")
+   #  messages.success(request, "logout success")
     return redirect("loginpage")

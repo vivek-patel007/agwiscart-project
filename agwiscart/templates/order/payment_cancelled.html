@@ -1,8 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Agwiscart.com-payment-cancelled {% endblock %}
+{% block title %} Agwiscart.com-payment-cencelled {% endblock %}
 {% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 mx-auto my-5 p-5 text-center" style="box-shadow: 0px 0px 10px gray;">
+        <h2 class="text-danger mb-0">Payment cencelled &nbsp;.&nbsp; try  again to pay.  </h2>
+        <h2 class="text-danger mt-0">or  </h2>
+        <h2 class="text-danger">chose pay on delivary. </h2><br>
+       
+                <img src="{% static 'images/faieled.gif' %}" height="300" width="300" alt="success image"><br>
+                <a href="{% url 'shop_homepage' %}"><h2 class="text-warning">Click Hear To Continue Shopping.</h2></a>
+                <a href=""><h4 class="text-warning">go to Dashboard.</h2></a>
 
-    <p>Payment cancelled.</p>
+        </div>
+        </div>
+        </div>
 
 {% endblock body %}

@@ -7,7 +7,6 @@ from paypal.standard.forms import PayPalPaymentsForm
 from order.models import UserOrder
 from cart.models import UserCart
 from django.contrib.auth.models import User
-from PayTm import Checksum
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
@@ -27,9 +26,23 @@ def place_order(request):
        amt=int(float(am))
        redio=request.POST["optradio"]
        
-       
-       
        if redio =="cod":
+           if fname=="" or lname=="" or state=="" or add=="" or city=="" or zip=="" or len(zipc)<6 or phone=="" or mail=="":
+                messages.error(request,"please fill up the all details")
+           else:
+                crt=UserCart.objects.filter(owner=request.user.id,payment_status=False)
+                product=""
+                inv="INV-"
+                cart_ids=""
+                for i in crt:
+                    product+=str(i.product.product_id)+","
+                    inv+= str(i.id)+","+str(i.product_id)
+                    cart_ids+=str(i.id)+","
+       
+                usr=User.objects.get(id=request.user.id)
+                ordr=UserOrder(owner=usr,cart_ids=cart_ids,product_ids=product,invoice_id=inv,first_name=fname,last_name=lname,state=state,address=add,address2=add2,city=city,zip_code=zipc,phone=phone,email=mail,amount=amt)
+                ordr.save()
+                request.session["order_id"]=ordr.order_id
            messages.success(request,"success order")
            return redirect("success_order")
        else:     
@@ -81,7 +94,7 @@ def payment_done(request):
             crt=UserCart.objects.get(id=i)
             crt.payment_status=True
             crt.save()
-    return render(request, 'order/payment_done.html')
+    return render(request, 'order/payment_done.html',{'order_id':order_id})
 
 
 @csrf_exempt
@@ -89,4 +102,8 @@ def payment_cancelled(request):
     return render(request, 'order/payment_cancelled.html')
 
 def success_order(request):
-    return render(request, 'order/success_order.html')
+    order_id=request.session["order_id"]
+    return render(request, 'order/success_order.html',{'order_id':order_id})
+
+def deshboard(request):
+    return render(request,'order/dashbboard.html')
